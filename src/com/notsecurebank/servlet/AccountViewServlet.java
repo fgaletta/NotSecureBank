@@ -49,8 +49,9 @@ public class AccountViewServlet extends HttpServlet {
         if (request.getRequestURL().toString().endsWith("showTransactions")) {
             String startTime = request.getParameter("startDate");
             String endTime = request.getParameter("endDate");
-
-            LOG.info("Transactions in time frame selected");
+            String logMessage = "Transactions within '" + startTime + "' and '" + endTime + "'.";
+            Logger logger = LogManager.getLogger(AccountViewServlet.class);
+            logger.info(logMessage);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/bank/transaction.jsp?" + ((startTime != null) ? "&startTime=" + startTime : "") + ((endTime != null) ? "&endTime=" + endTime : ""));
             dispatcher.forward(request, response);
         }
